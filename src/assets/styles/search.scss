@@ -1,0 +1,34 @@
+.search {
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+
+  form {
+    display: flex;
+    width: 100%;
+  }
+
+  input {
+    flex: 1;
+    font-size: 14px;
+    padding: 6px 10px;
+    border: 0px;
+    outline: 0;
+  }
+  button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px 8px;
+    border: 0px;
+    background-color: #fff;
+    .icon {
+      color: #777;
+    }
+    &:hover {
+      .icon {
+        color: #000;
+      }
+    }
+  }
+}

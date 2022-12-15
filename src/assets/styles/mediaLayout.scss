@@ -1,0 +1,45 @@
+.media-layout {
+  & > .title {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  & > .content {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5%;
+
+    a {
+      flex: 13% 0;
+      color: #fff;
+      .item {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+          transform: scale(1.05, 1.05);
+        }
+
+        .poster {
+          height: 90%;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            box-shadow: 2px 2px 8px #111;
+            background-color: #222124;
+          }
+        }
+        .title {
+          text-align: center;
+          height: 70px;
+          margin-top: 6px;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}

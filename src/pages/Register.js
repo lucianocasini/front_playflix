@@ -1,0 +1,81 @@
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router";
+import useInput from "../hooks/useInput";
+import {
+  validateUsername,
+  validateEmail,
+  validatePassword,
+  validateConfirmPassword,
+} from "../utils/userFormsValidator";
+
+import { FaTimesCircle } from "react-icons/fa";
+import "../assets/styles/userForms.scss";
+
+const RegisterForm = () => {
+  const [error, setError] = useState("");
+  const username = useInput();
+  const email = useInput();
+  const password = useInput();
+  const confirmPassword = useInput();
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError("");
+    if (!validateUsername(username.value))
+      return setError("Usuario inválido. Ingrese caracteres alfanuméricos");
+
+    if (!validateEmail(email.value))
+      return setError("El email ingresado es inválido");
+
+    if (!validatePassword(password.value))
+      return setError(
+        "Contraseña inválida. Debe tener entre 6 y 25 caracteres"
+      );
+
+    if (!validateConfirmPassword(password.value, confirmPassword.value))
+      return setError("Las contraseñas ingresadas no coinciden");
+
+    axios
+      .post("/api/user/", {
+        username: username.value,
+        email: email.value,
+        password: password.value,
+        confirmPassword: confirmPassword.value,
+      })
+      .then(() => navigate("/login?success=1"))
+      .catch((err) => setError(err.response.data));
+  };
+
+  return (
+    <div className="user-form">
+      <div className="title">Crear cuenta</div>
+      {error && (
+        <div className="error-box">
+          <FaTimesCircle /> <span>{error}</span>
+        </div>
+      )}
+      <div className="form">
+        <form onSubmit={handleSubmit}>
+          <input type="text" placeholder="Nombre de usuario" {...username} />
+
+          <input type="text" placeholder="Correo electrónico" {...email} />
+
+          <input type="password" placeholder="Contraseña" {...password} />
+
+          <input
+            type="password"
+            placeholder="Confirme su contraseña"
+            {...confirmPassword}
+          />
+
+          <button type="submit">Crear cuenta</button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default RegisterForm;
