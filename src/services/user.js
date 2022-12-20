@@ -20,6 +20,14 @@ const userLogout = async () => {
   return axios.get('/api/user/logout');
 };
 
+const getLoggedUser = async () => {
+  return axios.get('/api/user/me');
+};
+
+const getFavorites = async () => {
+  return axios.get('/api/user/favorites');
+};
+
 const addFavorite = async (id, type, title, poster) => {
   return axios.post('/api/user/favorites', {
     id,
@@ -33,4 +41,12 @@ const removeFavorite = async (id) => {
   return axios.delete(`/api/user/favorites/${id}`);
 };
 
-export { userLogin, userRegister, userLogout, addFavorite, removeFavorite };
+export {
+  userLogin,
+  userRegister,
+  userLogout,
+  getLoggedUser,
+  getFavorites,
+  addFavorite,
+  removeFavorite,
+};

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router';
-import axios from 'axios';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser, setFavorites } from './store/user';
@@ -15,22 +14,21 @@ import SearchResults from './pages/SearchResults';
 import TvShow from './pages/TvShow';
 import MyFavorites from './pages/MyFavorites';
 import Home from './pages/Home';
+import { getFavorites, getLoggedUser } from './services/user';
 
 const App = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get('/api/user/me')
+    getLoggedUser()
       .then((res) => res.data)
       .then((user) => dispatch(setUser(user)));
 
-    axios
-      .get('/api/user/favorites')
+    getFavorites()
       .then((res) => res.data)
       .then((favorites) => dispatch(setFavorites(favorites)));
-  }, [user.id]);
+  }, [dispatch, user.id]);
   return (
     <div className="layout">
       <Header />
