@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 
-import { logoutUser } from "../store/user";
-import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from '../store/user';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { FaAt, FaSignOutAlt } from "react-icons/fa";
+import { FaAt, FaSignOutAlt } from 'react-icons/fa';
+import { userLogout } from '../services/user';
 
 const UserMenu = () => {
   const user = useSelector((state) => state.user);
@@ -20,14 +20,13 @@ const UserMenu = () => {
   };
 
   const handleLogout = () => {
-    axios
-      .get("/api/user/logout")
+    userLogout()
       .then(() => {
         dispatch(logoutUser());
         setShowDropdown(false);
-        navigate("/");
+        navigate('/');
       })
-      .catch(() => alert("Ha ocurrido un error. Intente nuevamente"));
+      .catch(() => alert('Ha ocurrido un error. Intente nuevamente'));
   };
 
   if (!user.id) {
