@@ -1,21 +1,23 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useLocation, useNavigate } from "react-router";
-import useInput from "../hooks/useInput";
+import React, { useState } from 'react';
 
-import { useDispatch } from "react-redux";
-import { setUser } from "../store/user";
+import { useLocation, useNavigate } from 'react-router';
+import useInput from '../hooks/useInput';
 
-import "../assets/styles/userForms.scss";
-import { FaTimesCircle, FaCheckCircle } from "react-icons/fa";
+import { useDispatch } from 'react-redux';
+import { setUser } from '../store/user';
+
+import '../assets/styles/userForms.scss';
+import { FaTimesCircle, FaCheckCircle } from 'react-icons/fa';
+
+import { userLogin } from '../services/user';
 
 const LoginForm = () => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const username = useInput();
   const { reset: resetPassword, ...password } = useInput({ reset: true });
 
   const queryURL = useLocation().search;
-  const successRegister = new URLSearchParams(queryURL).get("success");
+  const successRegister = new URLSearchParams(queryURL).get('success');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,18 +25,14 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (username.value.trim() === "") return setError("Ingrese un usuario");
-    if (password.value.trim() === "") return setError("Ingrese una contraseña");
+    if (username.value.trim() === '') return setError('Ingrese un usuario');
+    if (password.value.trim() === '') return setError('Ingrese una contraseña');
 
-    axios
-      .post("/api/user/login", {
-        password: password.value,
-        username: username.value,
-      })
+    userLogin(username.value, password.value)
       .then((res) => res.data)
       .then((user) => {
         dispatch(setUser(user));
-        navigate("/");
+        navigate('/');
       })
       .catch((err) => {
         setError(err.response.data);
@@ -47,7 +45,7 @@ const LoginForm = () => {
       <div className="title">Iniciar sesión</div>
       {successRegister && !error && (
         <div className="success-box">
-          <FaCheckCircle />{" "}
+          <FaCheckCircle />{' '}
           <span>Gracias por tu registro. ¡Ya puedes iniciar sesión!</span>
         </div>
       )}
