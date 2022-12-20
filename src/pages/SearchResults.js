@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useLocation, Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 
-import Loading from "../commons/Loading";
-import MediaItem from "../commons/MediaItem";
-import MediaLayout from "../commons/MediaLayout";
+import Loading from '../commons/Loading';
+import MediaItem from '../commons/MediaItem';
+import MediaLayout from '../commons/MediaLayout';
+
+import { search } from '../services/content';
 
 const SearchResults = () => {
   const [results, setResults] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const queryURL = useLocation().search;
-  const queryStr = new URLSearchParams(queryURL).get("query");
+  const queryStr = new URLSearchParams(queryURL).get('query');
 
   useEffect(() => {
     setIsLoading(true);
-    axios
-      .get(`/api/search?query=${queryStr}`)
+    search(queryStr)
       .then((res) => setResults(res.data))
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
@@ -25,7 +25,7 @@ const SearchResults = () => {
 
   return (
     <>
-      <div style={{ marginBottom: "14px", fontSize: "20px" }}>
+      <div style={{ marginBottom: '14px', fontSize: '20px' }}>
         Resultados de su búsqueda
       </div>
       {results.movies.length === 0 && results.tvshow.length === 0 && (
