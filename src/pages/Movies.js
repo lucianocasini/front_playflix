@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-import Loading from "../commons/Loading";
-import MediaItem from "../commons/MediaItem";
-import MediaLayout from "../commons/MediaLayout";
+import Loading from '../commons/Loading';
+import MediaItem from '../commons/MediaItem';
+import MediaLayout from '../commons/MediaLayout';
+import { getMovies } from '../services/content';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("/api/movie")
+    getMovies()
       .then((res) => res.data)
       .then((movies) => setMovies(movies.results))
       .catch((err) => console.log(err))
