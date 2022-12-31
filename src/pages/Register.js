@@ -45,7 +45,14 @@ const RegisterForm = () => {
       confirmPassword.value
     )
       .then(() => navigate('/login?success=1'))
-      .catch((err) => setError(err.response.data));
+      .catch((err) => {
+        const error = err.response.data;
+        if (error.errors) {
+          setError(error.errors[0].msg);
+        } else {
+          setError('Ha ocurrido un error');
+        }
+      });
   };
 
   return (
