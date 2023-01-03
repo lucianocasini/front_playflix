@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -10,20 +10,14 @@ import { userLogout } from '../services/user';
 
 const UserMenu = () => {
   const user = useSelector((state) => state.user);
-  const [showDropdown, setShowDropdown] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
 
   const handleLogout = () => {
     userLogout()
       .then(() => {
         dispatch(logoutUser());
-        setShowDropdown(false);
         navigate('/');
       })
       .catch(() => alert('Ha ocurrido un error. Intente nuevamente'));
@@ -39,7 +33,7 @@ const UserMenu = () => {
   } else {
     return (
       <div className="user">
-        <div className="username" onClick={toggleDropdown}>
+        <div className="username">
           <FaAt className="icon" />
           <span>{user.username}</span>
         </div>
