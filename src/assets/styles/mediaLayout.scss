@@ -43,3 +43,21 @@
     }
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .media-layout > .content a {
+    flex: 16%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .media-layout > .content a {
+    flex: 24%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .media-layout > .content a {
+    flex: 34%;
+  }
+}
