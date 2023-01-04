@@ -10,8 +10,7 @@ const Home = () => {
     <div
       className="home"
       style={{
-        background: `url("${homeBackground}")`,
-        backgroundSize: 'cover',
+        backgroundImage: `url("${homeBackground}")`,
       }}
     >
       <div className="search-container">
