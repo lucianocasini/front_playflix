@@ -74,7 +74,12 @@ const ResponsiveMenu = ({ setShowResponsiveMenu, user }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/register">Registrarme</Link>
+                <Link
+                  to="/register"
+                  onClick={() => setShowResponsiveMenu(false)}
+                >
+                  Registrarme
+                </Link>
               </li>
             </>
           )}
