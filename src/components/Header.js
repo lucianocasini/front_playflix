@@ -11,7 +11,7 @@ import ResponsiveMenu from './ResponsiveMenu';
 
 const Header = () => {
   const user = useSelector((state) => state.user);
-  const [showResponsiveMenu, setShowResponsiveMenu] = useState(true);
+  const [showResponsiveMenu, setShowResponsiveMenu] = useState(false);
 
   const handleResponsiveMenu = () => {
     setShowResponsiveMenu(true);
