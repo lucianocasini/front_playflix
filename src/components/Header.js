@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import Search from './Search';
 import UserMenu from './UserMenu';
 
-import { FaHome, FaFilm, FaTv, FaStar } from 'react-icons/fa';
+import { FaHome, FaFilm, FaTv, FaStar, FaBars } from 'react-icons/fa';
 import '../assets/styles/header.scss';
+import ResponsiveMenu from './ResponsiveMenu';
 
 const Header = () => {
   const user = useSelector((state) => state.user);
+  const [showResponsiveMenu, setShowResponsiveMenu] = useState(false);
+
+  const handleResponsiveMenu = () => {
+    setShowResponsiveMenu(true);
+  };
+
+  useEffect(() => {
+    const body = document.body;
+    body.style.overflow = showResponsiveMenu ? 'hidden' : 'auto';
+  }, [showResponsiveMenu]);
   return (
     <>
       <div className="header">
@@ -45,9 +56,19 @@ const Header = () => {
         <div className="right">
           <Search />
           <UserMenu />
+          <FaBars
+            className="icon-responsive-menu"
+            onClick={handleResponsiveMenu}
+          />
         </div>
       </div>
       <div className="header-space"></div>
+      {showResponsiveMenu && (
+        <ResponsiveMenu
+          setShowResponsiveMenu={setShowResponsiveMenu}
+          user={user}
+        />
+      )}
     </>
   );
 };

@@ -43,3 +43,33 @@
     }
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .media-layout {
+    flex-grow: 0;
+    .content {
+      gap: 2%;
+      a {
+        flex-basis: calc(100% / 4 - 1.6%);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .media-layout > .content {
+    gap: 3%;
+    a {
+      flex-basis: calc(100% / 3 - 2.2%);
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .media-layout > .content {
+    gap: 4%;
+    a {
+      flex-basis: calc(100% / 2 - 2.4%);
+    }
+  }
+}

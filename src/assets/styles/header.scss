@@ -87,8 +87,44 @@
       }
     }
   }
+  .icon-responsive-menu {
+    display: none;
+    cursor: pointer;
+    font-size: 28px;
+  }
 }
 .header-space {
   height: 52px;
   width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+  .responsive-menu {
+    display: flex !important;
+  }
+  .header {
+    .icon-responsive-menu {
+      display: block;
+    }
+    nav {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    .user,
+    .user-access {
+      display: none !important ;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    .search {
+      display: none;
+    }
+  }
 }
